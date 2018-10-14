@@ -1,0 +1,44 @@
+---
+- name: configura docker network
+  copy:
+    content: "{ 'bip': '192.168.200.1/24' }"
+    dest: /etc/docker/daemon.json
+  become: yes
+
+- name: inicia servico docker
+  service:
+    name: docker
+    state: started
+  become: yes
+
+- name: efetua docker pull de imagem apache
+  shell: docker pull httpd
+  become: yes
+
+- name: cria pasta de volume persistente para arquivos do site
+  file:
+    path: /opt/desafio-devops/www
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0744
+  become: yes
+
+- name: copia arquivos html para instancia ec2
+  copy:
+    src: files/index.html
+    dest: /opt/desafio-devops/www
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+  become: yes
+
+- name: cria container apache
+  docker_container:
+    name: apache
+    image: httpd
+    published_ports:
+      - "80:80"
+    volumes:
+      - /opt/desafio-devops/www:/usr/local/apache2/htdocs/
+  become: yes

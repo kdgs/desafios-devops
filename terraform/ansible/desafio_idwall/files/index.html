@@ -1,0 +1,37 @@
+# Desafio XxX - Terraform
+
+## Processo terraform
+ - Primeiro passo: criar conta no amazon aws categoria free
+ - Segundo passo: instalar binarios awscli para consultar algumas informações necessárias
+ - Terceiro passo: definir estrutura para criaçao dos arquivos de configuração do terraform
+ - Quarto passo: criar playbook para execução de configurações automatizadas via ansible
+ 
+## Utilização
+
+### Requisitos:
+    - python >= 2.6
+    - docker-py quando python <= 2.6
+    - docker quando python >= 2.6 (instalar via pip "pip install docker")
+    - docker-api >= 1.20
+    - conta ativada na amazon aws
+    - acesso ssh ao endereço da isntancia EC2
+
+### Como utilizar
+    - Parametros necessários:
+        - aws_region: Deve ser informada via linha de comando a região utilizada no amazon aws
+        - ssh_permited_access: Host ou cidr permitido para acesso SSH à instancia EC2
+        - access_key: Chave de acesso ao amazon aws
+        - secret_key: Senha de acesso ao amazon aws
+        
+    - Execução do terraform:
+        - Comandos abaixo devem ser executados na pasta do repositório.
+            - terraform init
+            - terraform apply -auto-aprove
+            
+    - Saída:
+        - outputs:
+            - instance_ip: Ip publico da instancia EC2
+
+### Acesso
+    - É possivel acessar este readme no endereço publico da instancia EC2 no amazon aws.
+      Basta apontar no navegador o endereço: http://<ip_da_instancia_ec2>

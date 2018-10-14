@@ -1,0 +1,5 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - { role: desafio_idwall, release: "{{ release }}" }

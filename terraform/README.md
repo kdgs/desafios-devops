@@ -1,26 +1,38 @@
-# Desafio 01: Infrastructure-as-code - Terraform
+# Desafio XxX - Terraform
 
-## Motivação
+## Processo terraform
+ - Primeiro passo: criar conta no amazon aws categoria free
+ - Segundo passo: instalar binarios awscli para consultar algumas informações necessárias
+ - Terceiro passo: definir estrutura para criaçao dos arquivos de configuração do terraform
+ - Quarto passo: criar playbook para execução de configurações automatizadas via ansible
+ 
+## Utilização
 
-Recursos de infraestrutura em nubvem devem sempre ser criados utilizando gerenciadores de configuração, tais como [Cloudformation](https://aws.amazon.com/cloudformation/), [Terraform](https://www.terraform.io/) ou [Ansible](https://www.ansible.com/), garantindo que todo recurso possa ser versionado e recriado de forma facilitada.
+### Requisitos:
+    - python >= 2.6
+    - docker-py quando python <= 2.6
+    - docker quando python >= 2.6 (instalar via pip "pip install docker")
+    - docker-api >= 1.20
+    - conta ativada na amazon aws
+    - acesso ssh ao endereço da isntancia EC2
 
-## Objetivo
-
-- Criar uma instância **n1-standard-1** (GCP) ou **t2.micro** (AWS) Linux utilizando **Terraform**.
-- A instância deve ter aberta somente às portas **80** e **443** para todos os endereços
-- A porta SSH (**22**) deve estar acessível somente para um _range_ IP definido.
-- **Inputs:** A execução do projeto deve aceitar dois parâmetros:
-  - O IP ou _range_ necessário para a liberação da porta SSH
-  - A região da _cloud_ em que será provisionada a instância
-- **Outputs:** A execução deve imprimir o IP público da instância
-
-
-## Extras
-
-- Pré-instalar o docker na instância que suba automáticamente a imagem do [Apache](https://hub.docker.com/_/httpd/), tornando a página padrão da ferramenta visualizável ao acessar o IP público da instância
-- Utilização de módulos do Terraform
-
-## Notas
-- Pode se utilizar tanto AWS quanto GCP (Google Cloud), não é preciso executar o teste em ambas, somente uma.
-- Todos os recursos devem ser criados utilizando os créditos gratuitos da AWS/GCP.
-- Não esquecer de destruir os recursos após criação e testes do desafio para não haver cobranças ou esgotamento dos créditos.
+### Como utilizar
+    - Parametros necessários:
+        - aws_region: Deve ser informada via linha de comando a região utilizada no amazon aws
+        - ssh_permited_access: Host ou cidr permitido para acesso SSH à instancia EC2
+        - access_key: Chave de acesso ao amazon aws
+        - secret_key: Senha de acesso ao amazon aws
+        
+    - Execução do terraform:
+        - Comandos abaixo devem ser executados na pasta do repositório.
+            - terraform init
+            - terraform apply -auto-aprove
+            
+    - Saída:
+        - outputs:
+            - instance_ip: Ip publico da instancia EC2
+            
+### Acesso
+    - É possivel acessar este readme no endereço publico da instancia EC2 no amazon aws. 
+      Basta apontar no navegador o endereço: http://<ip_da_instancia_ec2>
+    
